@@ -19,11 +19,11 @@
 	
 	<select id="boardProc" resultType="BoardDTO">
 		SELECT B.* FROM(
-			SELECT rownum rn, A.* FROM(
+			SELECT A.*, ROWNUM() as rn FROM(
 				SELECT * FROM quiz_board
 				<choose>
-					<when test="sel == 'id'">WHERE id LIKE '%'||#{search}||'%'</when>
-					<when test="sel == 'title'">WHERE title LIKE '%'||#{search}||'%'</when>
+					<when test="sel == 'id'">WHERE id LIKE CONCAT('%',#{search},'%')</when>
+					<when test="sel == 'title'">WHERE title LIKE CONCAT('%',#{search},'%')</when>
 				</choose>
 				 ORDER BY no DESC 
 			)A
@@ -32,8 +32,8 @@
 	<select id="boardCount" resultType="int"  parameterType="HashMap">
 		SELECT count(*) FROM quiz_board 
 		<choose>
-			<when test="select == 'id'">WHERE id LIKE '%'||#{search}||'%'</when>
-			<when test="select == 'title'">WHERE title LIKE '%'||#{search}||'%'</when>
+			<when test="select == 'id'">WHERE id LIKE CONCAT('%',#{search},'%')</when>
+			<when test="select == 'title'">WHERE title LIKE CONCAT('%',#{search},'%')</when>
 		</choose>
 	</select>
 	<update id="modifyProc" parameterType="BoardDTO" >

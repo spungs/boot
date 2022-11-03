@@ -45,6 +45,6 @@ public interface IMemberDAO {
 
 	void deleteLogin(String modifyId);
 
-	int memberCount();
+	int memberCount(@Param("sel")String select, @Param("search")String search);
 
 }

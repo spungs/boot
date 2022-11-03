@@ -74,7 +74,7 @@ public class MemberServiceImpl implements IMemberService {
 	@Override
 	public void memberList(int currentPage, String select, String search) {
 		int pageBlock = 3; // 한 화면에 보여줄 데이터 수
-		int totalCount = memberDao.memberCount(); // 총 데이터의 수 
+		int totalCount = memberDao.memberCount(search, search); // 총 데이터의 수 
 		int end = currentPage * pageBlock; // 데이터의 끝 번호
 		int begin = end+1 - pageBlock; // 데이터의 시작 번호
 		

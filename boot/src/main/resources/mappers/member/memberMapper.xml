@@ -17,9 +17,9 @@
 	
 	<insert id="insertPost" parameterType="PostDTO">
 		<selectKey keyProperty="no" resultType="int" order="BEFORE">
-			SELECT nvl(max(no), 0)+1 FROM postcode
+			SELECT nvl(max(no), 0)+1 FROM post
 		</selectKey>
-		INSERT INTO postcode VALUES(#{no}, #{zipcode}, #{addr1}, #{addr2}, #{id} )
+		INSERT INTO post VALUES(#{no}, #{zipcode}, #{addr1}, #{addr2}, #{id} )
 	</insert>
 
 </mapper>

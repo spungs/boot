@@ -28,6 +28,9 @@ SQL> SELECT B.* FROM(
          3 user10                                   n    kys8502@naver.com
 
  -->
+ 
+ <!-- 오라클버전 -->
+ <!-- 
 	<select id="memberList" resultType="MemberDTO">
 		SELECT B.* FROM(
 			SELECT rownum rn, A.* FROM( 
@@ -43,10 +46,49 @@ SQL> SELECT B.* FROM(
 			)A
 		)B WHERE rn BETWEEN #{b} and #{e}
 	</select>
+ -->
+ 
+ <!--  
+[MySQL or MariaDB]
+title like CONCAT('%',#{keyword},'%')
 
-	<select id="memberCount" resultType="int">
-		SELECT count(*) FROM member
+
+[Oracle]
+title like '%' ||  #{keyword} || '%'
+
+
+[MSSQL]
+title like '%' + #{keyword} + '%' -->
+
+	<select id="memberList" resultType="MemberDTO">
+		SELECT B.* FROM(
+			SELECT A.*, ROWNUM() as rn FROM( 
+				SELECT * FROM member 
+				<choose>
+					<when test="sel == 'id'">
+						WHERE id like CONCAT('%',#{search},'%')
+					</when>
+					<when test="sel == 'email'">
+						WHERE email like CONCAT('%',#{search},'%')
+					</when>
+				</choose>
+			)A
+		)B WHERE rn BETWEEN #{b} and #{e}
 	</select>
+	
+	<select id="memberCount" resultType="Integer">
+		SELECT count(*) FROM member
+			<choose>
+				<when test="sel == 'id'">
+					WHERE id like CONCAT('%',#{search},'%')
+				</when>
+				<when test="sel == 'email'">
+					WHERE email like CONCAT('%',#{search},'%')
+				</when>
+			</choose>
+	</select> 
+	
+
 	
 <!-- 
 	<select id="userAll" resultType="com.care.quiz.membership.dto.AllDTO" parameterType="String">

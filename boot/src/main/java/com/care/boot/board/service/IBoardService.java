@@ -7,8 +7,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.care.boot.board.dto.BoardDTO;
 
 public interface IBoardService {
-	
-	String FILE_LOCATION = "C:\\javas\\upload";
+	/*
+	 ubuntu@ip-172-31-13-122:~$ cd /opt/tomcat/tomcat-9/webapps
+	 ubuntu@ip-172-31-13-122:/opt/tomcat/tomcat-9/webapps$ mkdir upload
+	 ubuntu@ip-172-31-13-122:/opt/tomcat/tomcat-9/webapps$ sudo chown tomcat: upload
+	 */
+	String FILE_LOCATION = "/opt/tomcat/tomcat-9/webapps/upload";
 
 	void writeProc(MultipartHttpServletRequest multi);
 
