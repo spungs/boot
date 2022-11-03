@@ -15,9 +15,9 @@ public interface IMemberDAO {
 
 	int isExistId(String id);
 	
-	void insertLogin(LoginDTO login);
+	int insertLogin(LoginDTO login);
 
-	void insertMember(MemberDTO member);
+	int insertMember(MemberDTO member);
 
 	void insertPost(PostDTO post);
 
